@@ -18,16 +18,16 @@ namespace MusicalScales2
             FileStream fs = new FileStream(path, FileMode.Open);
             BinaryFormatter formatter = new BinaryFormatter();
             Hashtable temphash = null;
-            fs.Close();
+          //  fs.Close();
             // Open the file containing the data that you want to deserialize.
-            FileStream ffs = new FileStream(path, FileMode.Open);
+         //   FileStream ffs = new FileStream(path, FileMode.Open);
             // try
 
-            BinaryFormatter fformatter = new BinaryFormatter();
+          //  BinaryFormatter fformatter = new BinaryFormatter();
 
             // Deserialize the hashtable from the file and 
             // assign the reference to the local variable.
-            temphash = (Hashtable)formatter.Deserialize(ffs);
+            temphash = (Hashtable)formatter.Deserialize(fs);
 
             //catch (SerializationException e)
             //{
@@ -36,7 +36,7 @@ namespace MusicalScales2
             //}
             //finally
             
-                ffs.Close();
+                fs.Close();
             
 
 
@@ -45,7 +45,7 @@ namespace MusicalScales2
             //string scale = Console.ReadLine();
 
            // Hashtable scalehash = new Hashtable();
-            temphash.Add("mijir", "212221");
+            temphash.Add("mijirr", "212221");
 
             //Scale s = new Scale();
             //s.name = "major";
