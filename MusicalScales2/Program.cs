@@ -13,108 +13,77 @@ namespace MusicalScales2
     {
         static void Main(string[] args)
         {
-
+            string scale_name="", scale_formula="";
             string path = "C:\\Users\\admin.INL082\\source\\repos\\MusicalScales2\\Scales\\vector.txt";
             FileStream fs = new FileStream(path, FileMode.Open);
             BinaryFormatter formatter = new BinaryFormatter();
-            Hashtable temphash = null;
-          //  fs.Close();
-            // Open the file containing the data that you want to deserialize.
-         //   FileStream ffs = new FileStream(path, FileMode.Open);
-            // try
+            Hashtable scalehash = null;
 
-          //  BinaryFormatter fformatter = new BinaryFormatter();
+            scalehash = (Hashtable)formatter.Deserialize(fs);
 
-            // Deserialize the hashtable from the file and 
-            // assign the reference to the local variable.
-            temphash = (Hashtable)formatter.Deserialize(fs);
+            foreach (string key in scalehash.Keys)
+            {
+                Console.WriteLine(String.Format("{0}: {1}", key, scalehash[key]));
+            }
 
-            //catch (SerializationException e)
-            //{
-            //    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-            //    throw;
-            //}
-            //finally
-            
-                fs.Close();
-            
+            int q = 1;
+            while (q ==1)
+            {
 
+                Console.WriteLine("Enter the scale : ");
+                string input_scale = Console.ReadLine();
+                if (scalehash.ContainsKey(input_scale))
+                {
 
+                    Console.WriteLine(scalehash[input_scale]);
+                    Scale s = new Scale(input_scale, scalehash[input_scale].ToString());
+                    s.ToString();
+                    q = 0;
+                    
+                }
+                else //if (!scalehash.ContainsKey(input_scale))
+                {
+                    Console.WriteLine("Key does not exist. Do you want to add? y/n");
+                    string choice = Console.ReadLine();
+                    if (choice == "y")
+                    {
+                        Console.WriteLine("Enter the name : ");
+                        scale_name = Console.ReadLine();
+                        Console.WriteLine("Enter the formula : ");
+                        scale_formula = Console.ReadLine();
+                        scalehash.Add(scale_name, scale_formula);
+                        formatter.Serialize(fs, scalehash);
+                        
+                        q = 0;
+                    }
+                    
+                    else
+                    {
+                        q = 1;
+                    }
+                    fs.Close();
 
-            //Console.WriteLine("Enter the scale : ");
-            //string scale = Console.ReadLine();
-
-           // Hashtable scalehash = new Hashtable();
-            temphash.Add("mijirr", "212221");
+                }
+                
+            }
+            // scalehash.Add("maihjirrs", "212221");
 
             //Scale s = new Scale();
             //s.name = "major";
             //s.formula = "2212221";
 
-            //var binformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            //using (var fs = File.AppendText("C:\\Users\\admin.INL082\\source\\repos\\MusicalScales2\\Scales\\vector.txt"))
-            //{
-            //    binformatter.Serialize(fs, scalehash);
-            //}
 
-
-            //string path = "C:\\Users\\admin.INL082\\source\\repos\\MusicalScales2\\Scales\\vector.txt";
+          //  fs = new FileStream(path, FileMode.Open);
+            System.IO.File.WriteAllText(path, "");
             fs = new FileStream(path, FileMode.Open);
-            //BinaryFormatter formatter = new BinaryFormatter();
-
-
-            formatter.Serialize(fs, temphash);
-            fs.Close();
-
-
-            //// read the data from the file
-            //Hashtable vectorDeserialized = null;
-            //using (var fs = File.Open("C:\\Users\\admin.INL082\\source\\repos\\MusicalScales2\\Scales\\vector.txt", FileMode.Open))
-            //{
-            //    vectorDeserialized = (Hashtable)binformatter.Deserialize(fs);
-            //}
-
-            //// show the result
-            //foreach (DictionaryEntry entry in vectorDeserialized)
-            //{
-            //    Console.WriteLine("{0}={1}", entry.Key, entry.Value);
-            //}
-
-
-           // Hashtable temphash = null;
-
-           // // Open the file containing the data that you want to deserialize.
-           // FileStream ffs = new FileStream(path, FileMode.Open);
-           //// try
+            formatter.Serialize(fs, scalehash);
             
-           //     BinaryFormatter fformatter = new BinaryFormatter();
 
-           // // Deserialize the hashtable from the file and 
-           // // assign the reference to the local variable.
-           // temphash = (Hashtable)formatter.Deserialize(ffs);
-            
-           // //catch (SerializationException e)
-           // //{
-           // //    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-           // //    throw;
-           // //}
-           // //finally
-           // {
-           //     fs.Close();
-           // }
-
-            // To prove that the table deserialized correctly, 
-            // display the key/value pairs.
-            //foreach (DictionaryEntry de in addresses)
-            //{
-            //    Console.WriteLine("{0} scale is {1}.", de.Key, de.Value);
-            //}
-
-            foreach (string key in temphash.Keys)
+            foreach (string key in scalehash.Keys)
             {
-                Console.WriteLine(String.Format("{0}: {1}", key, temphash[key]));
+                Console.WriteLine(String.Format("{0}: {1}", key, scalehash[key]));
             }
-
+            fs.Close();
             Console.Read();
         }
     }

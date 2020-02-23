@@ -15,5 +15,16 @@ namespace MusicalScales2
        // public string notes;
        // public string root;
 
+        public Scale(string n, string f)
+
+        {
+            this.name = n;
+            this.formula = f;
+        }
+
+        public void Print()
+        {
+
+        }
     }
 }
