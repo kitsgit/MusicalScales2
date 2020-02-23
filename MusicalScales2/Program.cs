@@ -14,15 +14,38 @@ namespace MusicalScales2
         static void Main(string[] args)
         {
 
+            string path = "C:\\Users\\admin.INL082\\source\\repos\\MusicalScales2\\Scales\\vector.txt";
+            FileStream fs = new FileStream(path, FileMode.Open);
+            BinaryFormatter formatter = new BinaryFormatter();
+            Hashtable temphash = null;
+            fs.Close();
+            // Open the file containing the data that you want to deserialize.
+            FileStream ffs = new FileStream(path, FileMode.Open);
+            // try
 
+            BinaryFormatter fformatter = new BinaryFormatter();
+
+            // Deserialize the hashtable from the file and 
+            // assign the reference to the local variable.
+            temphash = (Hashtable)formatter.Deserialize(ffs);
+
+            //catch (SerializationException e)
+            //{
+            //    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+            //    throw;
+            //}
+            //finally
+            
+                ffs.Close();
+            
 
 
 
             //Console.WriteLine("Enter the scale : ");
             //string scale = Console.ReadLine();
 
-            Hashtable scalehash = new Hashtable();
-            scalehash.Add("mijor", "212221");
+           // Hashtable scalehash = new Hashtable();
+            temphash.Add("mijir", "212221");
 
             //Scale s = new Scale();
             //s.name = "major";
@@ -33,10 +56,14 @@ namespace MusicalScales2
             //{
             //    binformatter.Serialize(fs, scalehash);
             //}
-            string path = "C:\\Users\\admin.INL082\\source\\repos\\MusicalScales2\\Scales\\vector.txt";
-            FileStream fs = new FileStream(path, FileMode.Open);
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(fs, scalehash);
+
+
+            //string path = "C:\\Users\\admin.INL082\\source\\repos\\MusicalScales2\\Scales\\vector.txt";
+            fs = new FileStream(path, FileMode.Open);
+            //BinaryFormatter formatter = new BinaryFormatter();
+
+
+            formatter.Serialize(fs, temphash);
             fs.Close();
 
 
@@ -54,27 +81,27 @@ namespace MusicalScales2
             //}
 
 
-            Hashtable temphash = null;
+           // Hashtable temphash = null;
 
-            // Open the file containing the data that you want to deserialize.
-            FileStream ffs = new FileStream(path, FileMode.Open);
-           // try
+           // // Open the file containing the data that you want to deserialize.
+           // FileStream ffs = new FileStream(path, FileMode.Open);
+           //// try
             
-                BinaryFormatter fformatter = new BinaryFormatter();
+           //     BinaryFormatter fformatter = new BinaryFormatter();
 
-            // Deserialize the hashtable from the file and 
-            // assign the reference to the local variable.
-            temphash = (Hashtable)formatter.Deserialize(ffs);
+           // // Deserialize the hashtable from the file and 
+           // // assign the reference to the local variable.
+           // temphash = (Hashtable)formatter.Deserialize(ffs);
             
-            //catch (SerializationException e)
-            //{
-            //    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-            //    throw;
-            //}
-            //finally
-            {
-                fs.Close();
-            }
+           // //catch (SerializationException e)
+           // //{
+           // //    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+           // //    throw;
+           // //}
+           // //finally
+           // {
+           //     fs.Close();
+           // }
 
             // To prove that the table deserialized correctly, 
             // display the key/value pairs.
