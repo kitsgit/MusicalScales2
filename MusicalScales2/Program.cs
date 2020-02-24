@@ -24,7 +24,7 @@ namespace MusicalScales2
             fs.Close();
             foreach (string key in scalehash.Keys)
             {
-                Console.WriteLine(String.Format("{0}: {1}", key, scalehash[key]));
+                Console.WriteLine(String.Format("{0} : {1}", key, scalehash[key]));
             }
             Console.WriteLine();
             int q = 1;
