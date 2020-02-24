@@ -23,12 +23,15 @@ namespace MusicalScales2
             this.formula = f;
             this.root = r;
         }
-
+        public Scale(string n, string f)
+        {
+            this.name = n;
+            this.formula = f;
+        }
         public void Print()
         {
             int position = Array.IndexOf(notes, this.root);
-           // string[] s = new string[] { this.formula };
-            int[] seq = new int[20];
+            int[] seq = new int[30];
             for (int i = 0; i < this.formula.Length; i++)
             {
                 seq[i] = Int32.Parse(this.formula[i].ToString());
@@ -36,6 +39,20 @@ namespace MusicalScales2
                 position += seq[i];
             }
             Console.WriteLine();
+        }
+
+        public void PrintAll()
+        {
+            for (int i = 0; i < notes.Length; i++)
+            {
+                Scale s = new Scale(this.name, this.formula, notes[i]);
+                s.Print();
+            }
+        }
+        static public string Ask(string question)
+        {
+            Console.WriteLine(question);
+            return Console.ReadLine();
         }
     }
 }
