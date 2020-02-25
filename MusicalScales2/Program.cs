@@ -24,6 +24,10 @@ namespace MusicalScales2
             Hashtable scalehash = null;
             scalehash = (Hashtable)formatter.Deserialize(fs);
             fs.Close();
+            if(scalehash.ContainsKey("test"))
+            {
+                scalehash.Remove("test");
+            }
             foreach (string key in scalehash.Keys)
             {
                 Console.WriteLine(String.Format("{0} : {1}", key, scalehash[key]));
@@ -85,6 +89,11 @@ namespace MusicalScales2
                             fs = new FileStream(path, FileMode.Open);
                             scale_name = Scale.Ask("Enter the name : ");
                             scale_formula = Scale.Ask("Enter the formula : ");
+                            scale_formula.ToLower();
+                            if (scale_formula.StartsWith("w") || scale_formula.StartsWith("h"))
+                            {
+                                scale_formula = Scale.scaleConvert(scale_formula);
+                            }
                             scalehash.Add(scale_name, scale_formula);
                             formatter.Serialize(fs, scalehash);
                             fs.Close();
